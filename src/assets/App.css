@@ -1,0 +1,44 @@
+/* App design */
+body{
+}
+
+
+/* Header design */
+.header{
+    background-color: #019AA5;
+    text-align: center;
+    height: 80px
+}
+
+.title-header{
+    color: azure;
+}
+
+/* Graphs design */
+.mainContainer{
+    padding-top: 2%;
+    width: 100%;
+    float: left;
+    padding-bottom: 2%;
+}
+
+.subContainer{
+    width: 33.3%;
+    float: left;
+}
+
+.iframeStyle{
+    border: 1px solid #cccccc;
+}
+
+.sensor-heading{
+    text-align: center;
+}
+
+/* Table Design */
+.heading{
+    font-weight: bolder;
+    text-align: center;
+    padding-bottom: 1%;
+}
+
