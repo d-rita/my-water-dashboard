@@ -47,6 +47,41 @@ export const data = {
         "field1": 7.2,
         "field2": "5.00000",
         "field3":34
+      },
+      {
+        "created_at": "2020-01-07T15:08:54Z",
+        "entry_id": 6,
+        "field1": 7.2,
+        "field2": "5.00000",
+        "field3":34
+      },
+      {
+        "created_at": "2020-01-07T15:08:54Z",
+        "entry_id": 7,
+        "field1": 7.2,
+        "field2": "5.00000",
+        "field3":34
+      },
+      {
+        "created_at": "2020-01-07T15:08:54Z",
+        "entry_id": 8,
+        "field1": 7.2,
+        "field2": "5.00000",
+        "field3":34
+      },
+      {
+        "created_at": "2020-01-07T15:08:54Z",
+        "entry_id": 9,
+        "field1": 7.2,
+        "field2": "5.00000",
+        "field3":34
+      },
+      {
+        "created_at": "2020-01-07T15:08:54Z",
+        "entry_id": 10,
+        "field1": 7.2,
+        "field2": "5.00000",
+        "field3":34
       }
     ]
   }
