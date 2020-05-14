@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
-import { data } from './data'
-
+import { processDataFeeds } from '../utils/processing';
 
 class Table extends Component{
     constructor(props){
@@ -14,28 +13,25 @@ class Table extends Component{
         }
     }
 
-    componentDidMount(){
-        this.setState({
-            tableData: data.feeds
-        });
-        // const url = "https://api.thingspeak.com/channels/945591/feeds.json?results=20";
-        // axios(url)
-        // .then((resp)=> {
-        //     console.log(resp.data.feeds);
-        //     this.setState({ 
-        //         tableData: [resp.data.feeds],
-        //         error: null
-        //      })
-        // })
-        // .catch((err)=> {
-        //     console.log(err);
-        //     this.setState({ error: err})
-        // })
+    componentDidMount(){ 
+        const url = "https://api.thingspeak.com/channels/945591/feeds.json?results=10";
+        axios(url)
+        .then((resp)=> {
+            let tableData = processDataFeeds(resp.data.feeds);
+            console.log(resp.data.feeds);
+            this.setState({ 
+                tableData,
+                error: null
+             })
+        })
+        .catch((err)=> {
+            console.log(err);
+            this.setState({ error: err})
+        })
     }
 
     render() {
-        const { tableData, error } = this.state;
-        // console.log(tableData[0]);
+        const { tableData } = this.state;
 
         const options = {
             page: 1,  // page default
@@ -63,14 +59,14 @@ class Table extends Component{
             alwaysShowAllBtns: true // Always show next and previous button
         }
         return (
-            <div>
-                <p className="heading">Table of Sensor Readings </p>
+            <div className="table-section">
                 <BootstrapTable data={tableData} pagination options={options}>
-                    <TableHeaderColumn dataField="created_at" dataAlign='center' headerAlign="center" width="20%" dataSort={true}>Date Created</TableHeaderColumn>
+                    <TableHeaderColumn dataField="date" dataAlign='center' headerAlign="center" width="20%" dataSort>Date</TableHeaderColumn>
+                    <TableHeaderColumn dataField="time" dataAlign='center' headerAlign="center" width="20%" dataSort>Time</TableHeaderColumn>
                     <TableHeaderColumn dataField="entry_id" isKey dataAlign='center' headerAlign="center" width="20%" hidden>ID</TableHeaderColumn>
-                    <TableHeaderColumn dataField="field2" dataAlign='center' headerAlign="center" width="20%">Turbidity</TableHeaderColumn>
-                    <TableHeaderColumn dataField="field1" dataAlign='center' headerAlign="center" width="20%">pH</TableHeaderColumn>
-                    <TableHeaderColumn dataField="field3" dataAlign='center' headerAlign="center" width="20%">Temperature</TableHeaderColumn>
+                    <TableHeaderColumn dataField="turbidity" dataAlign='center' headerAlign="center" width="20%">Turbidity (NTUs)</TableHeaderColumn>
+                    <TableHeaderColumn dataField="pH" dataAlign='center' headerAlign="center" width="20%">pH</TableHeaderColumn>
+                    <TableHeaderColumn dataField="temperature" dataAlign='center' headerAlign="center" width="20%">Temperature (Celsius)</TableHeaderColumn>
                 </BootstrapTable>
             </div>
         )

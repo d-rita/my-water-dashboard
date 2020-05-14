@@ -1,32 +1,63 @@
 /* App design */
-html{
-    /* height: 100%; */
-}
 
 body{
-    background-color: rgb(240, 240, 240);
+    background-color: #f5fffa;
     height: 100vh;
 }
 
-
 /* Header design */
 .header{
-    background-color: #019AA5;
     text-align: center;
-    height: 80px
 }
 
 .title-header{
-    padding-top: 1%;
+    background-color: #019AA5;
+    padding-top: 0.5%;
+    padding-left: 1%;
     color: azure;
+}
+
+.readings-heading{
+    font-weight: bold;
+    text-align: left;
+    font-size: 1.2em;
+    padding-left: 10%;
+}
+
+.readings{
+    text-align: left;
+    font-size: 1.2em;
+    padding-left: 10%;
+}
+
+.reading-error{
+    color: red;
+}
+
+.reading-warning{
+    color: rgb(255, 94, 0);
+}
+
+.reading-green{
+    color: green;
+}
+
+.readings-section{
+    width: 100%;
+    height: 50px;;
+    float: left;
+}
+
+.readings-header{
+    width: 24%;
+    float: left;
 }
 
 /* Graphs design */
 .mainContainer{
-    padding-top: 1%;
     width: 100%;
-    float: left;
-    /* padding-bottom: 1%; */
+    padding-left: 1.5%;
+    padding-top: 2%;
 }
 
 .subContainer{
@@ -49,4 +80,10 @@ body{
     text-align: center;
     font-size: 1.2em;
 }
+
+.table-section{
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
 
