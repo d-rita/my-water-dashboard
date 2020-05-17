@@ -13,8 +13,9 @@ class Header extends Component{
         };
     }
 
-    componentDidMount(){ 
-       const url = "https://api.thingspeak.com/channels/945591/feeds.json?results=1"; 
+    fetchLastFeed()
+    {
+        const url = "https://api.thingspeak.com/channels/945591/feeds.json?results=1"; 
         axios(url)
         .then((resp)=> {
             let feedStatus = processSingleFeed(resp.data.feeds[0]);
@@ -28,6 +29,16 @@ class Header extends Component{
         .catch((err)=> {
             this.setState({ error: err})
         })
+    }
+
+    componentDidMount()
+    { 
+       this.timer = setInterval(() => this.fetchLastFeed(), 5000);
+    }
+
+    componentWillUnmount()
+    {
+        clearInterval(this.timer);
     }
 
     render() {
@@ -44,7 +55,7 @@ class Header extends Component{
         return (
             <div>
                 <header className="header">
-                    <h1 className="title-header">Domestic Water Monitor Dashboard</h1> 
+                    <h1 className="title-header">Domestic Water Monitor Site</h1> 
                     {error ?  " " : (
                         <div className="readings-section">
                         <div className="readings-header">
