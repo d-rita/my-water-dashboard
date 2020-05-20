@@ -13,7 +13,8 @@ class Table extends Component{
         }
     }
 
-    componentDidMount(){ 
+    fetchData()
+    {
         const url = "https://api.thingspeak.com/channels/945591/feeds.json?results=10";
         axios(url)
         .then((resp)=> {
@@ -28,6 +29,19 @@ class Table extends Component{
             console.log(err);
             this.setState({ error: err})
         })
+    }
+
+    componentDidMount()
+    // update state every minute
+    { 
+        this.timerID = setInterval(
+            () => this.fetchData(), 5000
+        );
+    }
+
+    componentWillUnmount()
+    {
+        clearInterval(this.timerID);
     }
 
     render() {
