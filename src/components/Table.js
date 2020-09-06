@@ -19,14 +19,12 @@ class Table extends Component{
         axios(url)
         .then((resp)=> {
             let tableData = processDataFeeds(resp.data.feeds);
-            console.log(resp.data.feeds);
             this.setState({ 
                 tableData,
                 error: null
              })
         })
         .catch((err)=> {
-            console.log(err);
             this.setState({ error: err})
         })
     }
@@ -56,7 +54,7 @@ class Table extends Component{
             }, {
               text: 'All', value: tableData.length
             } ],
-            sizePerPage: 5,
+            sizePerPage: 10,
             pageStartIndex: 1,
             paginationSize: 3, 
             prePage: 'Previous',

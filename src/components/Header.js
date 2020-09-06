@@ -55,24 +55,23 @@ class Header extends Component{
         return (
             <div>
                 <header className="header">
-                    <h1 className="title-header">Domestic Water Monitor Site</h1> 
-                    {error ?  " " : (
+                    <h1 className="title-header">Domestic Water Monitoring Site</h1> 
+                    {/* {error ?  " " : ( */}
                         <div className="readings-section">
-                        <div className="readings-header">
-                            <p className="readings-heading">Current Sensor Readings Status:</p>
-                        </div>
-                        <div className="readings-header">
-                            <p className="readings"><b>Turbidity: </b><span className={tStyle}>{turbidity}</span></p>
-                        </div>
-                        <div className="readings-header">
-                            <p className="readings"><b>pH: </b><span className={pStyle}>{pH}</span></p>
-                        </div>
-                        <div className="readings-header">
-                            <p className="readings"><b>Temperature: </b><span className={tmpStyle}>{temperature}</span></p>
-                        </div>
-                    </div> 
-                )
-    } 
+                            <div className="readings-header">
+                                <p className="readings"><b>Current Turbidity </b></p>
+                                <p className={tStyle}>Check sensor{turbidity}</p>
+                            </div>
+                            <div className="readings-header">
+                                <p className="readings"><b>Current pH</b></p>
+                                <p className="reading-warning">{pH} Check sensor</p>
+                            </div>
+                            <div className="readings-header">
+                                <p className="readings"><b>Current Temperature </b></p>
+                                <p className="reading-green">{temperature} Check sensor</p>
+                            </div>
+                        </div> 
+                {/* )} */} 
                 </header>
             </div>
         )
