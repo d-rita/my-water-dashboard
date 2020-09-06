@@ -9,11 +9,11 @@ const App = () => {
     <div className="App">
       <Header />
       <main>
+      <section className="main-graphs">
+          <Graphs />
+        </section>
         <section className="main-table">
           <Table />
-        </section>
-        <section className="main-graphs">
-          <Graphs />
         </section>
       </main>   
     </div>

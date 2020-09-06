@@ -18,6 +18,7 @@ class Header extends Component{
         const url = "https://api.thingspeak.com/channels/945591/feeds.json?results=1"; 
         axios(url)
         .then((resp)=> {
+            console.log(resp.data.feeds[0]);
             let feedStatus = processSingleFeed(resp.data.feeds[0]);
             this.setState({
             turbidity: feedStatus[0],
@@ -33,7 +34,7 @@ class Header extends Component{
 
     componentDidMount()
     { 
-       this.timer = setInterval(() => this.fetchLastFeed(), 5000);
+       this.timer = setInterval(() => this.fetchLastFeed(), 60000);
     }
 
     componentWillUnmount()
@@ -42,6 +43,7 @@ class Header extends Component{
     }
 
     render() {
+        console.log(this.state)
         const { turbidity, pH, temperature, error } = this.state;
 
         const tStyle = (turbidity === "Check sensor" ? "reading-warning" : (turbidity === "Normal" ? "reading-green" : "reading-error"));
@@ -50,28 +52,26 @@ class Header extends Component{
 
         const tmpStyle = (temperature === "Check sensor" ? "reading-warning" : " ");
 
-
-
         return (
             <div>
                 <header className="header">
                     <h1 className="title-header">Domestic Water Monitoring Site</h1> 
-                    {/* {error ?  " " : ( */}
+                    {error ?  " " : (
                         <div className="readings-section">
                             <div className="readings-header">
-                                <p className="readings"><b>Current Turbidity </b></p>
-                                <p className={tStyle}>Check sensor{turbidity}</p>
+                                <p className="readings"><b>Current Turbidity Status</b></p>
+                                <p className={tStyle}>{turbidity}</p>
                             </div>
                             <div className="readings-header">
-                                <p className="readings"><b>Current pH</b></p>
-                                <p className="reading-warning">{pH} Check sensor</p>
+                                <p className="readings"><b>Current pH Status</b></p>
+                                <p className={pStyle}>{pH}</p>
                             </div>
                             <div className="readings-header">
-                                <p className="readings"><b>Current Temperature </b></p>
-                                <p className="reading-green">{temperature} Check sensor</p>
+                                <p className="readings"><b>Current Temperature Level</b></p>
+                                <p className={tmpStyle}>{temperature}</p>
                             </div>
                         </div> 
-                {/* )} */} 
+                 )}
                 </header>
             </div>
         )

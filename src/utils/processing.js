@@ -41,8 +41,8 @@ export const processSingleFeed = (obj) => {
     }
 
     // check turbidity
-
-    if(!obj.field2)
+    console.log(`field : ${obj.field2}`)
+    if(!obj.field2 || obj.field2 < 0)
     {
         turbidityStatus = "Check sensor";
     }
