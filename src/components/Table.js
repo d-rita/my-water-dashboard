@@ -33,7 +33,7 @@ class Table extends Component{
     // update state every minute
     { 
         this.timerID = setInterval(
-            () => this.fetchData(), 5000
+            () => this.fetchData(), 10000
         );
     }
 

@@ -34,7 +34,7 @@ class Header extends Component{
 
     componentDidMount()
     { 
-       this.timer = setInterval(() => this.fetchLastFeed(), 60000);
+       this.timer = setInterval(() => this.fetchLastFeed(), 10000);
     }
 
     componentWillUnmount()
@@ -43,7 +43,6 @@ class Header extends Component{
     }
 
     render() {
-        console.log(this.state)
         const { turbidity, pH, temperature, error } = this.state;
 
         const tStyle = (turbidity === "Check sensor" ? "reading-warning" : (turbidity === "Normal" ? "reading-green" : "reading-error"));
