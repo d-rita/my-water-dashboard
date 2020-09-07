@@ -1,3 +1,6 @@
+import notify from "../components/Notification"
+
+
 export const processDataFeeds = (arr) => {
     arr.reverse();
     let newArr = [];
@@ -31,32 +34,36 @@ export const processSingleFeed = (obj) => {
     if(!obj.field1)
     {
         pHStatus = "Check sensor";
+        notify("Oops!😰 pH Sensor may be faulty!")
     }
     else if(obj.field1 < 6.8)
     {
         pHStatus = "Low";
+        notify(`pH level is ${pHStatus}!`)
     }
     else if(obj.field1 > 8.0)
     {
         pHStatus = "High";
+        notify(`pH level is ${pHStatus}!`)
     }
 
     // check turbidity
-    console.log(`field : ${obj.field2}`)
     if(!obj.field2 || obj.field2 < 0)
     {
         turbidityStatus = "Check sensor";
+        notify(`Oops!😰 Turbidity sensor may be faulty!`)
     }
     else if(obj.field2 > 5.0)
     {
         turbidityStatus = "High";
+        notify(`Turbidity level is ${turbidityStatus}!`)
     }
 
     // check temperature
-
     if(!temp)
     {
         temp = "Check sensor";
+        notify(`Oops!😰 Temperature sensor may be faulty!`)
     }
     else
     {

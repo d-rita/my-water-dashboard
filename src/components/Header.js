@@ -18,7 +18,6 @@ class Header extends Component{
         const url = "https://api.thingspeak.com/channels/945591/feeds.json?results=1"; 
         axios(url)
         .then((resp)=> {
-            console.log(resp.data.feeds[0]);
             let feedStatus = processSingleFeed(resp.data.feeds[0]);
             this.setState({
             turbidity: feedStatus[0],
