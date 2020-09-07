@@ -3,7 +3,7 @@ import React from 'react';
 const Graphs = () => {
     return (
         <div className="mainContainer">
-            <div className="subContainer">
+             <div className="subContainer">
                 <iframe title="turbidity" width="450" height="260" className="iframeStyle" src="https://thingspeak.com/channels/945591/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Turbidity+Chart&type=line&xaxis=Time&yaxis=Turbidity+%28NTU%29"></iframe>
             </div>
             <div className="subContainer">
@@ -11,7 +11,7 @@ const Graphs = () => {
             </div>
             <div className="subContainer">
                 <iframe title="temperature" width="450" height="260" className="iframeStyle" src="https://thingspeak.com/channels/945591/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&max=100&min=10&results=60&title=Temperature+Chart&type=line&xaxis=Time&yaxis=Temp+%28Celsius+Degrees%29"></iframe>
-            </div>
+            </div> 
         </div>
     )
 }

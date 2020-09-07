@@ -5,10 +5,11 @@ export const processDataFeeds = (arr) => {
     for(let i = 0, n = arr.length; i < n; i++){
         let newObj = {};
 
-        let timeDateArr = arr[i].created_at.split('T');
-        newObj.date = timeDateArr[0];
-        let time = timeDateArr[1].split('Z');
-        newObj.time = time[0];
+        let timeCreated = new Date(arr[i].created_at);
+
+        newObj.date = timeCreated.toDateString();
+        
+        newObj.time = timeCreated.toLocaleTimeString();
 
         newObj.entry_id = arr[i].entry_id;
         newObj.pH = arr[i].field1;
@@ -41,8 +42,8 @@ export const processSingleFeed = (obj) => {
     }
 
     // check turbidity
-
-    if(!obj.field2)
+    console.log(`field : ${obj.field2}`)
+    if(!obj.field2 || obj.field2 < 0)
     {
         turbidityStatus = "Check sensor";
     }

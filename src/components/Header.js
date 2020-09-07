@@ -18,6 +18,7 @@ class Header extends Component{
         const url = "https://api.thingspeak.com/channels/945591/feeds.json?results=1"; 
         axios(url)
         .then((resp)=> {
+            console.log(resp.data.feeds[0]);
             let feedStatus = processSingleFeed(resp.data.feeds[0]);
             this.setState({
             turbidity: feedStatus[0],
@@ -33,7 +34,7 @@ class Header extends Component{
 
     componentDidMount()
     { 
-       this.timer = setInterval(() => this.fetchLastFeed(), 5000);
+       this.timer = setInterval(() => this.fetchLastFeed(), 10000);
     }
 
     componentWillUnmount()
@@ -50,29 +51,26 @@ class Header extends Component{
 
         const tmpStyle = (temperature === "Check sensor" ? "reading-warning" : " ");
 
-
-
         return (
             <div>
                 <header className="header">
-                    <h1 className="title-header">Domestic Water Monitor Site</h1> 
+                    <h1 className="title-header">Domestic Water Monitoring Site</h1> 
                     {error ?  " " : (
                         <div className="readings-section">
-                        <div className="readings-header">
-                            <p className="readings-heading">Current Sensor Readings Status:</p>
-                        </div>
-                        <div className="readings-header">
-                            <p className="readings"><b>Turbidity: </b><span className={tStyle}>{turbidity}</span></p>
-                        </div>
-                        <div className="readings-header">
-                            <p className="readings"><b>pH: </b><span className={pStyle}>{pH}</span></p>
-                        </div>
-                        <div className="readings-header">
-                            <p className="readings"><b>Temperature: </b><span className={tmpStyle}>{temperature}</span></p>
-                        </div>
-                    </div> 
-                )
-    } 
+                            <div className="readings-header">
+                                <p className="readings"><b>Current Turbidity Status</b></p>
+                                <p className={tStyle}>{turbidity}</p>
+                            </div>
+                            <div className="readings-header">
+                                <p className="readings"><b>Current pH Status</b></p>
+                                <p className={pStyle}>{pH}</p>
+                            </div>
+                            <div className="readings-header">
+                                <p className="readings"><b>Current Temperature Level</b></p>
+                                <p className={tmpStyle}>{temperature}</p>
+                            </div>
+                        </div> 
+                 )}
                 </header>
             </div>
         )
