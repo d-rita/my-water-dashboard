@@ -26,4 +26,4 @@ This is the frontend application to a Domestic Water Quality Monitoring system I
 - This app is hosted [here](https://water-quality-dashboard.netlify.app)
 
 ## Author
-* [**Diana Nanyanzi**][https://github.com/d-rita]
+* [**Diana Nanyanzi**](https://github.com/d-rita)
