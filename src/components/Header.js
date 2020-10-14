@@ -6,6 +6,7 @@ class Header extends Component{
     constructor(props){
         super(props);
         this.state = {
+            id: 0,
             turbidity: "",
             pH: '',
             temperature: null,
@@ -18,13 +19,18 @@ class Header extends Component{
         const url = "https://api.thingspeak.com/channels/945591/feeds.json?results=1"; 
         axios(url)
         .then((resp)=> {
-            let feedStatus = processSingleFeed(resp.data.feeds[0]);
-            this.setState({
-            turbidity: feedStatus[0],
-            pH: feedStatus[1],
-            temperature: feedStatus[2],
-            error: null
-        })
+            let currentFeedId = this.state.id
+            let fetchedFeedId = resp.data.channel.last_entry_id
+            if (currentFeedId !== fetchedFeedId){
+                let feedStatus = processSingleFeed(resp.data.feeds[0]);
+                this.setState({
+                id: fetchedFeedId,
+                turbidity: feedStatus[0],
+                pH: feedStatus[1],
+                temperature: feedStatus[2],
+                error: null
+                })
+            }
         })
         .catch((err)=> {
             this.setState({ error: err})
