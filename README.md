@@ -8,6 +8,7 @@ This is the frontend application to a Domestic Water Quality Monitoring system I
 - The app displays the current status of the most recent pH and turbidity values fed into the system.
 - It also fetches graphs from the ThingSpeak channel and displays them on the site.
 - It displays a table of the sensor values being logged at different time intervals.
+- It notifies the user of the most recent outlier changes in the parameters by email
 
 ## Installation
 
