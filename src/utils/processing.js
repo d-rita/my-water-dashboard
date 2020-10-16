@@ -1,4 +1,13 @@
-import notify from "../components/Notification"
+
+const processDate = (dateTimeObj) => {
+    let timeCreated = new Date(dateTimeObj);
+
+    let date = timeCreated.toDateString();
+        
+    let time = timeCreated.toLocaleTimeString();
+
+    return [date, time]
+}
 
 
 export const processDataFeeds = (arr) => {
@@ -8,11 +17,11 @@ export const processDataFeeds = (arr) => {
     for(let i = 0, n = arr.length; i < n; i++){
         let newObj = {};
 
-        let timeCreated = new Date(arr[i].created_at);
+        let timeCreated = processDate(arr[i].created_at);
 
-        newObj.date = timeCreated.toDateString();
+        newObj.date = timeCreated[0];
         
-        newObj.time = timeCreated.toLocaleTimeString();
+        newObj.time = timeCreated[1];
 
         newObj.entry_id = arr[i].entry_id;
         newObj.pH = arr[i].field1;
@@ -24,53 +33,69 @@ export const processDataFeeds = (arr) => {
     return newArr;
 }
 
-export const processSingleFeed = (obj) => {
+export const processSingleFeed = (feed) => {
 
     let pHStatus = "Normal";
     let turbidityStatus = "Normal";
-    let temp = obj.field3;
+    let tempStatus = "";
+
+    let pHMessage = "";
+    let tempMessage = "";
+    let turbidityMessage = "";
+
+    let processedObj = {}
+
+    let timeCreated = processDate(feed.created_at);
+
+    processedObj.date = timeCreated[0];
+    processedObj.time = timeCreated[1];
 
     // check pH
-    if(!obj.field1)
+    if(!feed.field1)
     {
         pHStatus = "Check sensor";
-        notify("Oops!😰 pH Sensor may be faulty!")
+        pHMessage = "Oops!😰 pH Sensor may be faulty!"
     }
-    else if(obj.field1 < 6.8)
+    else if(feed.field1 < 6.8)
     {
         pHStatus = "Low";
-        notify(`pH level is ${pHStatus}!`)
+        pHMessage = `pH level is ${pHStatus}!`
     }
-    else if(obj.field1 > 8.0)
+    else if(feed.field1 > 8.0)
     {
         pHStatus = "High";
-        notify(`pH level is ${pHStatus}!`)
+        pHMessage = `pH level is ${pHStatus}!`
     }
+    
 
     // check turbidity
-    if(!obj.field2 || obj.field2 < 0)
+    if(!feed.field2 || feed.field2 < 0)
     {
         turbidityStatus = "Check sensor";
-        notify(`Oops!😰 Turbidity sensor may be faulty!`)
+        turbidityMessage = `Oops!😰 Turbidity sensor may be faulty!`
     }
-    else if(obj.field2 > 5.0)
+    else if(feed.field2 > 5.0)
     {
         turbidityStatus = "High";
-        notify(`Turbidity level is ${turbidityStatus}!`)
+        turbidityMessage = `Turbidity level is ${turbidityStatus}!`
     }
 
     // check temperature
-    if(!temp)
+    if(!feed.field3)
     {
-        temp = "Check sensor";
-        notify(`Oops!😰 Temperature sensor may be faulty!`)
+        tempStatus = "Check sensor";
+        tempMessage = `Oops!😰 Temperature sensor may be faulty!`
+        
     }
-    else
-    {
-        temp = obj.field3;
-    }
+    processedObj.pHMessage = pHMessage;
+    processedObj.turbidityMessage = turbidityMessage
+    processedObj.tempMessage = tempMessage
 
-    return [turbidityStatus, pHStatus, temp];
+    processedObj.turbidityStatus = turbidityStatus
+    processedObj.tempStatus = tempStatus
+    processedObj.pHStatus = pHStatus
+
+    return processedObj;
 }
 
 
