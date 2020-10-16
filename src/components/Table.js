@@ -13,21 +13,33 @@ class Table extends Component{
         }
     }
 
-    componentDidMount(){ 
-        const url = "https://api.thingspeak.com/channels/945591/feeds.json?results=10";
+    fetchData()
+    {
+        const url = "https://api.thingspeak.com/channels/945591/feeds.json?results=20";
         axios(url)
         .then((resp)=> {
             let tableData = processDataFeeds(resp.data.feeds);
-            console.log(resp.data.feeds);
             this.setState({ 
                 tableData,
                 error: null
              })
         })
         .catch((err)=> {
-            console.log(err);
             this.setState({ error: err})
         })
+    }
+
+    componentDidMount()
+    // update state every minute
+    { 
+        this.timerID = setInterval(
+            () => this.fetchData(), 10000
+        );
+    }
+
+    componentWillUnmount()
+    {
+        clearInterval(this.timerID);
     }
 
     render() {
@@ -39,10 +51,13 @@ class Table extends Component{
               text: '5', value: 5
             }, {
               text: '10', value: 10
-            }, {
+            }, 
+            {
+                text: '15', value: 15
+            },{
               text: 'All', value: tableData.length
             } ],
-            sizePerPage: 5,
+            sizePerPage: 15,
             pageStartIndex: 1,
             paginationSize: 3, 
             prePage: 'Previous',
@@ -55,7 +70,7 @@ class Table extends Component{
             lastPageTitle: 'Go to Last', // Last page button title
             paginationShowsTotal: this.renderShowsTotal,  // Accept bool or function
             paginationPosition: 'top',  // default is bottom, top and both is all available
-            hideSizePerPage: true, //> You can hide the dropdown for sizePerPage
+            hideSizePerPage: false, //> You can hide the dropdown for sizePerPage
             alwaysShowAllBtns: true // Always show next and previous button
         }
         return (
@@ -66,7 +81,7 @@ class Table extends Component{
                     <TableHeaderColumn dataField="entry_id" isKey dataAlign='center' headerAlign="center" width="20%" hidden>ID</TableHeaderColumn>
                     <TableHeaderColumn dataField="turbidity" dataAlign='center' headerAlign="center" width="20%">Turbidity (NTUs)</TableHeaderColumn>
                     <TableHeaderColumn dataField="pH" dataAlign='center' headerAlign="center" width="20%">pH</TableHeaderColumn>
-                    <TableHeaderColumn dataField="temperature" dataAlign='center' headerAlign="center" width="20%">Temperature (Celsius)</TableHeaderColumn>
+                    <TableHeaderColumn dataField="temperature" dataAlign='center' headerAlign="center" width="20%">Temperature (C)</TableHeaderColumn>
                 </BootstrapTable>
             </div>
         )

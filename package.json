@@ -4,10 +4,12 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.2",
+    "emailjs-com": "^2.6.3",
     "react": "^16.13.1",
     "react-bootstrap-table": "^4.3.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-toastify": "^6.0.8"
   },
   "scripts": {
     "start": "react-scripts start",
