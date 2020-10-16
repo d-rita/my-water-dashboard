@@ -1,5 +1,7 @@
 # DOMESTIC WATER MONITORING DASHBOARD
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e3414446-9c12-4ee8-a511-5a381ce32339/deploy-status)](https://app.netlify.com/sites/water-quality-dashboard/deploys)
+
 ## Introduction
 ### What does the application do?
 This is the frontend application to a Domestic Water Quality Monitoring system I built using Arduino. The system comprises of 3 sensors, i.e. pH, turbidity and temperature, NodeMCU and an Arduino UNO. Together, they log sensor data and relay it to a channel created on the [ThingSpeak IoT](https://thingspeak.com/) platform. 
