@@ -9,6 +9,9 @@ const processDate = (dateTimeObj) => {
     return [date, time]
 }
 
+const specifyDecimalPlaces= (value, decimal) => {
+    return parseInt(value).toFixed(decimal)
+}
 
 export const processDataFeeds = (arr) => {
     arr.reverse();
@@ -24,9 +27,9 @@ export const processDataFeeds = (arr) => {
         newObj.time = timeCreated[1];
 
         newObj.entry_id = arr[i].entry_id;
-        newObj.pH = arr[i].field1;
-        newObj.turbidity = arr[i].field2;
-        newObj.temperature = arr[i].field3;
+        newObj.pH = specifyDecimalPlaces(arr[i].field1, 2);
+        newObj.turbidity = specifyDecimalPlaces(arr[i].field2, 2);
+        newObj.temperature = specifyDecimalPlaces(arr[i].field3, 2);
  
         newArr[i] = newObj;
     }
@@ -51,7 +54,7 @@ export const processSingleFeed = (feed) => {
     processedObj.time = timeCreated[1];
 
     // check pH
-    if(!feed.field1)
+    if(!feed.field1 || feed.field1 > 14.5)
     {
         pHStatus = "Check sensor";
         pHMessage = "Oops!😰 pH Sensor may be faulty!"
