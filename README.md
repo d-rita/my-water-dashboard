@@ -5,6 +5,7 @@
 ## Introduction
 ### What does the application do?
 This is the frontend application to a Domestic Water Quality Monitoring system I built using Arduino. The system comprises of 3 sensors, i.e. pH, turbidity and temperature, NodeMCU and an Arduino UNO. Together, they log sensor data and relay it to a channel created on the [ThingSpeak IoT](https://thingspeak.com/) platform. 
+NB: Data last fetched in 2020. No new data to display currently until hardware system is rebuilt
 
 ### Functionality
 - The app displays the current status of the most recent pH and turbidity values fed into the system.
@@ -25,7 +26,7 @@ This is the frontend application to a Domestic Water Quality Monitoring system I
 - Install dependencies using `yarn add` 
 - Use `yarn start` to run the app on your local machine
 
-### Live App
+### App
 - This app is hosted [here](https://water-quality-dashboard.netlify.app)
 
 ## Author
